@@ -21,7 +21,10 @@ TUGAS : Membuat aplikasi database sederhana
 # hasil tambah data
 ![](Screenshoot/database4.png)
 
+# edit data
+![](Screenshoot/database5.png)
 
-
+# hasil edit data
+![](Screenshoot/database6.png)
 
 
