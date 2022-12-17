@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../helper/dbhelper.dart';
-import '../entryform.dart';
+import '/helper/dbhelper.dart';
+import '/entryform.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'models/item.dart';
@@ -83,6 +83,12 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 Expanded(
                   child: Text(this.itemList![index].price.toString()),
+                ),
+                Expanded(
+                  child: Text(this.itemList![index].kode.toString()),
+                ),
+                Expanded(
+                  child: Text(this.itemList![index].stok.toString()),
                 ),
               ],
             ),

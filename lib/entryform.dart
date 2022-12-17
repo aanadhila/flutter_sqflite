@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/item.dart';
+import '/models/item.dart';
 
 class EntryForm extends StatefulWidget {
   Item? item;
@@ -16,6 +16,8 @@ class _EntryFormState extends State<EntryForm> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController stokController = TextEditingController();
+  TextEditingController kodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,8 @@ class _EntryFormState extends State<EntryForm> {
     if (item != null) {
       nameController.text = item!.name;
       priceController.text = item!.price.toString();
+      kodeController.text = item!.kode;
+      stokController.text = item!.stok;
     }
     return Scaffold(
         appBar: AppBar(
@@ -68,11 +72,44 @@ class _EntryFormState extends State<EntryForm> {
 
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                child: TextField(
+                  controller: stokController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Stok',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (value) {},
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                child: TextField(
+                  controller: kodeController,
+                  decoration: InputDecoration(
+                    labelText: 'Kode',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (value) {},
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: Row(
                   children: <Widget>[
                     Expanded(
                       child: ElevatedButton(
-                        child: const Text(
+                        style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).primaryColorDark,
+                            textStyle: TextStyle(
+                                color: Theme.of(context).primaryColorLight)),
+                        child: Text(
                           "Save",
                           textScaleFactor: 1.5,
                         ),
@@ -82,33 +119,34 @@ class _EntryFormState extends State<EntryForm> {
                             item = Item(
                               nameController.text,
                               int.parse(priceController.text),
+                              int.parse(stokController.text),
+                              kodeController.text,
                             );
                           } else {
                             item!.name = nameController.text;
                             item!.price = int.parse(priceController.text);
+                            item!.stok = int.parse(stokController.text);
+                            item!.kode = kodeController.text;
                           }
                           Navigator.pop(context, item);
                         },
                       ),
-                    ),
-                    Container(
-                      width: 5.0,
-                    ),
-                    //tombol batal
-                    Expanded(
-                      child: ElevatedButton(
-                        child: const Text(
-                          'Cancel',
-                          textScaleFactor: 1.5,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        )
                     )
                   ],
                 ),
               ),
+
+              Container(
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).primaryColorDark,
+                        textStyle: TextStyle(
+                            color: Theme.of(context).primaryColorLight)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancel', textScaleFactor: 1.5)),
+              )
             ],
           ),
         ));
